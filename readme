@@ -1,0 +1,51 @@
+# Message Service
+
+This repository contains a Flask-based HTTP API service for managing messages, along with Kubernetes, Terraform, and Jenkins configurations for deployment and CI/CD.
+
+## Table of Contents
+
+- [Components](#components)
+- [Setup and Running](#setup-and-running)
+- [Architectural Diagram](#architectural-diagram)
+
+## Components
+
+### Flask Application
+
+- **`app/app.py`**: The main Flask application file containing the API endpoints.
+- **`app/models.py`**: Defines the SQLAlchemy model for the `Message` table.
+- **`app/database.py`**: Initializes the database.
+- **`app/requirements.txt`**: Lists the Python dependencies.
+- **`app/Dockerfile`**: Builds the Docker image for the Flask application.
+- **`app/tests/test_app.py`**: Contains unit tests for the Flask application.
+
+### Kubernetes Specifications
+
+- **`kubernetes/deployment.yaml`**: Defines the deployment for the Flask application with zero downtime, sidecars, and autoscaling.
+- **`kubernetes/service.yaml`**: Defines the service for the Flask application.
+- **`kubernetes/ingress.yaml`**: Defines the ingress for the Flask application.
+- **`kubernetes/prometheus-monitor.yaml`**: Defines the Prometheus monitoring for the Flask application.
+- **`kubernetes/fluentd-config.yaml`**: ConfigMap for Fluentd configuration.
+- **`kubernetes/fluentd-daemonset.yaml`**: DaemonSet for Fluentd to gather logs.
+- **`kubernetes/mysql-statefulset.yaml`**: StatefulSet for deploying MySQL database.
+- **`kubernetes/hpa.yaml`**: Horizontal Pod Autoscaler for the Flask application.
+
+### Terraform Configuration
+
+- **`terraform/main.tf`**: Main Terraform configuration file for setting up an AWS EKS cluster.
+- **`terraform/variables.tf`**: Defines the variables used in the Terraform configuration.
+- **`terraform/outputs.tf`**: Defines the outputs of the Terraform configuration.
+
+### Jenkins Pipeline
+
+- **`Jenkinsfile`**: Defines the Jenkins pipeline for CI/CD of the Flask application.
+
+## Setup and Running
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+- Kubernetes
+- Terraform
+- Jenkins

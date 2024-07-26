@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: fluentd
+  template:
+    metadata:
+      labels:
+        name: fluentd
+    spec:
+      containers:
+      - name: fluentd
+        image: fluent/fluentd:v1.11-debian-1
+        env:
+        - name: FLUENTD_ARGS
+          value: "--no-supervisor -q"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /fluentd/etc
+        - name: varlog
+          mountPath: /var/log
+      volumes:
+      - name: config-volume
+        configMap:
+          name: fluentd-config
+      - name: varlog
+        hostPath:
+          path: /var/log
